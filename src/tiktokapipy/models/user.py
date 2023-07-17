@@ -76,15 +76,15 @@ class User(LightUser):
     # unique_id_modify_time: Optional[int]
     # is_a_d_virtual: Optional[bool]    # not sure what this is
     # tt_seller: Optional[bool]
-    bio_link: Optional[BioLink]       # contains a link and a risk amount
-    signature: Optional[str]
+    bio_link: Optional[BioLink] = None      # contains a link and a risk amount
+    signature: Optional[str] = None
 
     ###############
     # Misc fields #
     ###############
-    create_time: Optional[int]
+    create_time: Optional[int] = None
     # room_id: Optional[str]
-    extra_info: Optional[dict]        # not sure what this is
+    extra_info: Optional[dict] = None       # not sure what this is
 
     stats: Optional[UserStats] = None
     """Set on return from API. Contains user statistics."""
