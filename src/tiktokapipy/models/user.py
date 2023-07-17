@@ -56,7 +56,16 @@ class User(LightUser):
     verified: Optional[bool] = None
     # secret: Optional[bool]
     # ftc: Optional[bool]
-    # is_under_age_18: Optional[bool]
+    is_under_age_18: Optional[bool] = None
+
+    # additional fields:
+    language: Optional[str] = None
+    region: Optional[str] = None
+    nick_name_modify_time = Optional[int] = None
+    unique_id_modify_time = Optional[int] = None
+    following_visibility = Optional[int] = None
+  
+    
 
     ################
     # Avatar links #
