@@ -52,7 +52,7 @@ def slideshow_id():
 
 @pytest.fixture(scope="session")
 def user_name():
-    return "tiktok"
+    return "bjoernhoecke"
 
 
 @pytest.fixture(scope="session")

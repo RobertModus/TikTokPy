@@ -63,21 +63,23 @@ class Comment(CamelCaseModel):
     video_id: int = Field(
         ..., alias="aweme_id", description="The id of the Video this is commented under"
     )
-    # reply_id: int
-    # reply_to_reply_id: int
+    reply_id: Optional[int] = None
+    reply_to_reply_id: Optional[int] = None
 
     #################################################
     # Misc fields (not sure what most of these are) #
     #################################################
-    # create_time: int
-    # status: int
-    # text_extra: list
+    create_time: Optional[int] = None
+    status: Optional[int] = None
+    text_extra: Optional[list] = None
     # stick_position: int
-    # user_buried: bool
-    # no_show: bool
+    user_buried: Optional[bool] = None
+    no_show: Optional[bool] = None
     # collect_stat: int
     # trans_btn_style: int
-    # label_list: Optional[list]
+    label_list: Optional[list] = None
+
+    comment_language: Optional[str] = None
 
     @computed_field(repr=False)
     @property

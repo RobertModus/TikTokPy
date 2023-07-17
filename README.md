@@ -20,6 +20,8 @@
 
 **Extract data from TikTok without needing any login information or API keys.**
 
+Forked for modus monitoring purposes and, you know, for science!
+
 ## Table of Contents
 
 * [Getting Started](#getting-started)
