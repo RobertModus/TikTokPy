@@ -61,9 +61,9 @@ class User(LightUser):
     # additional fields:
     language: Optional[str] = None
     region: Optional[str] = None
-    nick_name_modify_time = Optional[int] = None
-    unique_id_modify_time = Optional[int] = None
-    following_visibility = Optional[int] = None
+    nick_name_modify_time: Optional[int] = None
+    unique_id_modify_time: Optional[int] = None
+    following_visibility: Optional[int] = None
   
     
 
