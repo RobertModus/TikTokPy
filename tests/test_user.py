@@ -4,6 +4,18 @@ import pytest
 async def test_user_async(async_api, user_name):
     user = await async_api.user(user_name, video_limit=2)
     assert user
+
+    # Extra data we want
+    assert user.signature
+    assert user.bio_link
+    assert user.bio_link.link == "linktr.ee/tiktok"
+    assert user.bio_link.risk == 0
+
+    # TODO: optional stuff, check relevance in data
+    # assert user.create_time
+    # assert user.relation
+    # assert user.extra_info
+
     assert user.videos
     i = 0
     async for video in user.videos:
@@ -15,6 +27,18 @@ async def test_user_async(async_api, user_name):
 def test_user_sync(sync_api, user_name):
     user = sync_api.user(user_name, video_limit=2)
     assert user
+
+    # Extra data we want
+    assert user.signature
+    assert user.bio_link
+    assert user.bio_link.link == "linktr.ee/tiktok"
+    assert user.bio_link.risk == 0
+
+    # TODO: optional stuff, check relevance in data
+    # assert user.create_time
+    # assert user.relation
+    # assert user.extra_info
+
     assert user.videos
     i = 0
     for video in user.videos:
