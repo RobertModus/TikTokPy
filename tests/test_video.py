@@ -8,6 +8,7 @@ async def test_video_async(async_api, video_id):
     assert await video.creator()
     async for comment in video.comments.limit(5):
         assert comment
+        assert comment.comment_language == "en"
     async for tag in video.tags:
         assert tag
 
