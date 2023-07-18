@@ -7,9 +7,10 @@ async def test_user_async(async_api, user_name):
 
     # Extra data we want
     assert user.signature
-    assert user.bio_link
-    assert user.bio_link.link == "linktr.ee/tiktok"
-    assert user.bio_link.risk == 0
+    assert user.bio_link is None
+    # @bjoernhoecke has no bio_link
+    # assert user.bio_link.link == "linktr.ee/tiktok"
+    # assert user.bio_link.risk == 0
 
     # TODO: optional stuff, check relevance in data
     # assert user.create_time
@@ -30,9 +31,10 @@ def test_user_sync(sync_api, user_name):
 
     # Extra data we want
     assert user.signature
-    assert user.bio_link
-    assert user.bio_link.link == "linktr.ee/tiktok"
-    assert user.bio_link.risk == 0
+    assert user.bio_link is None
+    # @bjoernhoecke has no bio_link
+    # assert user.bio_link.link == "linktr.ee/tiktok"
+    # assert user.bio_link.risk == 0
 
     # TODO: optional stuff, check relevance in data
     # assert user.create_time
