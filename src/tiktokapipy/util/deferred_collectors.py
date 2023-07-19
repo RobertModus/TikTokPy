@@ -59,6 +59,10 @@ class DeferredIterator(abc.ABC, Iterator[T], AsyncIterator[T]):
                 raise StopIteration
             self._fetch_sync()
 
+        # check if we actually fetched any items 
+        if self._head >= len(self._collected_values):
+            raise StopIteration
+            
         if 0 <= self._limit < len(self._collected_values):
             self._collected_values = self._collected_values[: self._limit]
             self._has_more = False
@@ -135,6 +139,8 @@ class DeferredCommentIterator(DeferredIterator[Comment]):
             "comment/list/", self._cursor, self._video_id, self._api.context
         )
         converted = APIResponse.model_validate(raw)
+        if converted.comments is None:
+            converted.comments = []
         for comment in converted.comments:
             comment._api = self._api
         self._has_more = converted.has_more
@@ -148,6 +154,8 @@ class DeferredCommentIterator(DeferredIterator[Comment]):
             "comment/list/", self._cursor, self._video_id, self._api.context
         )
         converted = APIResponse.model_validate(raw)
+        if converted.comments is None:
+            converted.comments = []
         for comment in converted.comments:
             comment._api = self._api
         self._has_more = converted.has_more
@@ -183,6 +191,8 @@ class DeferredItemListIterator(DeferredIterator[Video]):
             **self._extra_params,
         )
         converted = APIResponse.model_validate(raw)
+        if converted.item_list is None:
+            converted.item_list = []
         for item in converted.item_list:
             item._api = self._api
         self._has_more = converted.has_more
@@ -212,6 +222,8 @@ class DeferredItemListIterator(DeferredIterator[Video]):
             **self._extra_params,
         )
         converted = APIResponse.model_validate(raw)
+        if converted.item_list is None:
+            converted.item_list = []
         for item in converted.item_list:
             item._api = self._api
         self._has_more = converted.has_more
