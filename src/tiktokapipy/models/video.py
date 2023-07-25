@@ -150,7 +150,7 @@ class Video(LightVideo):
     music: MusicData
     # digged: bool
     # item_comment_status: int
-    # location_created: Optional[str]
+    location_created: Optional[str]
     image_post: Optional[ImagePost] = None
     """The images in the video if the video is a slideshow"""
 
@@ -190,7 +190,7 @@ class Video(LightVideo):
     # offical_item: bool                # this is a typo
     # is_activity_item: Optional[bool]
     # secret: bool
-    # index_enabled: Optional[bool]
+    index_enabled: Optional[bool]
     # show_not_pass: bool
 
     #################################################
@@ -199,7 +199,7 @@ class Video(LightVideo):
     # schedule_time: Optional[int]
     # take_down: Optional[int]
     # item_mute: bool
-    # text_extra: Optional[list]
+    text_extra: Optional[list]
     # effect_stickers: Optional[list]
     # stickers_on_item: Optional[list]
     # for_friend: bool
