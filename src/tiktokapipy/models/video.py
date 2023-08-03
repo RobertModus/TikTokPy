@@ -81,16 +81,16 @@ class MusicData(CamelCaseModel):
     """Contains data about the music within a video"""
 
     id: int
-    title: str
+    title: str = ""
     play_url: Optional[str] = None
     author_name: Optional[str] = None
-    duration: int
-    original: bool
+    duration: int = None
+    original: bool = True
     album: Optional[str] = None
 
-    cover_large: str
-    cover_medium: str
-    cover_thumb: str
+    cover_large: str = None
+    cover_medium: str = None
+    cover_thumb: str = None
 
     # schedule_search_time: int
 
