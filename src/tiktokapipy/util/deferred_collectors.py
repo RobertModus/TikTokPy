@@ -54,14 +54,21 @@ class DeferredIterator(abc.ABC, Iterator[T], AsyncIterator[T]):
         if 0 <= self._limit <= self._head:
             raise StopIteration
 
-        if self._head >= len(self._collected_values):
+        # if self._head >= len(self._collected_values):
+        #     if not self._has_more:
+        #         raise StopIteration
+        #     self._fetch_sync()
+
+        # # check if we actually fetched any items 
+        # if self._head >= len(self._collected_values):
+        #     raise StopIteration
+        
+        # skip over responses without any items :facepalm:
+        while self._head >= len(self._collected_values):
             if not self._has_more:
                 raise StopIteration
             self._fetch_sync()
 
-        # check if we actually fetched any items 
-        if self._head >= len(self._collected_values):
-            raise StopIteration
             
         if 0 <= self._limit < len(self._collected_values):
             self._collected_values = self._collected_values[: self._limit]
