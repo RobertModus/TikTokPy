@@ -19,6 +19,13 @@ class UserModule(CamelCaseModel):
     users: Dict[str, User]
     stats: Dict[str, UserStats]
 
+class UserInfo(CamelCaseModel):
+    """:autodoc-skip:"""
+
+    user: User
+    stats: UserStats
+
+
 
 class ChallengeInfo(CamelCaseModel):
     """:autodoc-skip:"""
@@ -82,9 +89,13 @@ DesktopResponseT = TypeVar("DesktopResponseT")
 class UserResponse(PrimaryResponseType):
     """:autodoc-skip:"""
 
-    item_module: Optional[Dict[int, LightVideo]] = None
-    user_module: Optional[UserModule] = None
-    user_page: StatusPage
+    # item_module: Optional[Dict[int, LightVideo]] = None
+    # user_module: Optional[UserModule] = None
+    # user_page: StatusPage
+
+    # item_module: Optional[Dict[int, LightVideo]] = None
+    userInfo: UserInfo = None
+    statusCode: Optional[int] = 1
 
 
 class VideoResponse(PrimaryResponseType):

@@ -199,12 +199,14 @@ if (navigator.webdriver === false) {
             page.route("**/*", ignore_scripts)
             try:
                 page.goto(link, wait_until=None)
-                page.wait_for_selector("#SIGI_STATE", state="attached")
+                page.wait_for_selector("#__UNIVERSAL_DATA_FOR_REHYDRATION__", state="attached")
                 content = page.content()
 
                 data = content.split(
-                    '<script id="SIGI_STATE" type="application/json">'
+                    '<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__" type="application/json">'
                 )[1].split("</script>")[0]
+
+                # print(data) # XXX
 
                 if "LoginContextModule" in data:
                     warnings.warn(
@@ -216,10 +218,10 @@ if (navigator.webdriver === false) {
                     page.goto(
                         sent_to_login.login_context_module.redirect_url, wait_until=None
                     )
-                    page.wait_for_selector("#SIGI_STATE", state="attached")
+                    page.wait_for_selector("#__UNIVERSAL_DATA_FOR_REHYDRATION__", state="attached")
                     content = page.content()
                     data = content.split(
-                        '<script id="SIGI_STATE" type="application/json">'
+                        '<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__" type="application/json">'
                     )[1].split("</script>")[0]
 
                 page.close()
@@ -256,6 +258,14 @@ if (navigator.webdriver === false) {
                 j = json.loads(data)
                 json.dump(j, f, indent=2)
 
+        # lazy hack to remove the first part of the json
+        pre_parse = json.loads(data)
+        pre_parse = pre_parse["__DEFAULT_SCOPE__"]["webapp.user-detail"]
+        data = json.dumps(pre_parse)
+
+        # print(type(data_model))
+        # print(data) # XXX
+
         parsed = data_model.model_validate_json(data)
         return parsed
 
@@ -278,13 +288,14 @@ if (navigator.webdriver === false) {
         self,
         response: UserResponse,
     ):
-        if response.user_page.status_code:
+        if response.statusCode:
             raise TikTokAPIError(
-                f"Error in user extraction: status code {response.user_page.status_code} "
-                f"({ERROR_CODES[response.user_page.status_code]})"
+                f"Error in user extraction: status code {response.statusCode} "
+                f"({ERROR_CODES[response.statusCode]})"
             )
-        name, user = list(response.user_module.users.items())[0]
-        user.stats = response.user_module.stats[name]
+        print(response)
+        user = response.userInfo.user
+        user.stats = response.userInfo.stats
         user._api = self
 
         return user
